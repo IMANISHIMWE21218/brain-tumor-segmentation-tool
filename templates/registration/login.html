@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+	<div class="flex justify-center items-center h-screen p-2 bg-black">
+		<form method="post">
+			{% csrf_token %}
+			<div class="md:shadow-xl p-4 w-96 bg-white rounded space-y-4">
+				<div class="flex justify-center items-center h-10">
+					<span class="font-semibold text-xl text-slate-600 underline decoration-sky-500">SIGN IN</span>
+				</div>
+				{% comment %} FOR START {% endcomment %}
+				{% for field in form %}
+				<div class="relative mb-6">
+					{% if field.label == 'Password' %}
+					<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+							fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round"
+								d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+						</svg>
+					</div>
+					<input type="password" id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						placeholder="{{field.label}}">
+					{% endif %}
+					{% if field.label == 'Username' %}
+					<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+						<svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+							viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+							<path strokeLinecap="round" strokeLinejoin="round"
+								d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+						</svg>
+					</div>
+					<input type="text" id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						placeholder="{{field.label}}">
+					{% endif %}
+				</div>
+
+				{% if field.errors %}
+				<div class='text-sm text-red-300 flex'>
+					({{field.label}}) {{ field.errors }}
+				</div>
+				{% endif %}
+				{% endfor %}
+
+				<div class="group relative">
+
+					<button
+						class="hover:bg-sky-300 group flex justify-center items-center rounded-md decoration-sky-500 bg-sky-500 text-white text-sm font-medium h-10 w-full shadow-sm">SIGN
+						IN</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+</body>
+
+</html>

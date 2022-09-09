@@ -1,0 +1,60 @@
+{% extends '../layout.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-xl font-bold text-gray-700 py-2 border-b">PATIENT DATA</h1>
+<form method="post" action="/upload/" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="text-gray-700 flex w-full space-x-2 my-6">
+        <div class="bg-white  w-1/2 border p-2">
+            <div class="my-2">
+                <h1 class"text-xl text-gray-700 border-b">NEW PATIENT</h1>
+            </div>
+            <hr/>
+            <div class="my-2"></div>
+            {% for field in form %}
+            {% if field.id_for_label == 'id_original_image' %}
+            <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-700">
+                {{ field.label}}
+            </label>
+            <div class="relative mb-2">
+                <input type="file" accept="image/png, image/jpeg" id="{{ field.id_for_label }}"
+                       name="{{ field.html_name }}"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="{{field.label}}" required>
+            </div>
+            {% else %}
+            {% comment %} <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-700">
+            {{ field.label}}
+        </label> {% endcomment %}
+            <div class="relative mb-2">
+                <input type="text" id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="{{field.label}}" required>
+            </div>
+            {% endif %}
+            {{field.error}}
+            {% endfor %}
+
+            <div class="relative mb-2">
+                <button
+                        class="bg-sky-800 p-2 text-white shadow-lg hover:bg-sky-500 hover:text-gray-800">SUBMIT
+                </button>
+            </div>
+        </div>
+<!--        <div class="bg-white w-1/2 border p-2">-->
+<!--            <h1 class"text-xl text-gray-700">RESULT IMAGE</h1>-->
+<!--            <div>-->
+<!--                {% if patient %}-->
+<!--                {{ patient.email }} {{ patient.created_on | date:"M d, Y - H:i" }}-->
+
+<!--                {% endif %}-->
+<!--                {% if patient.original_image %}-->
+<!--                <img src="{{ patient.original_image.url}}" alt="{{patient.email}}" class="object-cover" width="100%"-->
+<!--                     srcset=""/>-->
+<!--                {% endif %}-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+</form>
+{% endblock content %}
