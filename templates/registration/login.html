@@ -8,9 +8,15 @@
 	<title>Document</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-<body>
-	<div class="flex justify-center items-center h-screen p-2 bg-black">
+<style>
+	#body{
+		background-image: url("hero-bg.png");
+		background-position:top center;
+		background-size:cover;
+	}
+</style>
+<body id="body" class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500">
+	<div class="flex justify-center items-center h-screen p-2">
 		<form method="post">
 			{% csrf_token %}
 			<div class="md:shadow-xl p-4 w-96 bg-white rounded space-y-4">
